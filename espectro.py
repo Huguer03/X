@@ -1,39 +1,41 @@
 import pandas as pd
 import numpy as np
-from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
-from scipy.constants import e, c
 import utiles as ut
 import scienceplots
 plt.style.use(['science'])  
 
 def analisis():
-    delta_beta = 0.2
-
+    d = 2.8201
     data_df = pd.read_excel("DATOS/espectro.xlsx")
 
-    beta = data_df["Beta"].to_numpy()
+    beta = data_df["Beta"].to_numpy() + 0.4
     R_0  = data_df["R_0"].to_numpy()
     R_1  = data_df["R_1"].to_numpy()
     R_2  = data_df["R_2"].to_numpy()
     R_3  = data_df["R_3"].to_numpy()
 
+    Q        = np.asarray([np.max(R_0[beta<=5.4]), np.max(R_1[beta<=6.2]), np.max(R_2[beta<=6.2]), np.max(R_3[beta<=7])])
+    beta_min = np.asarray([beta[R_0==Q[0]][0],beta[R_1==Q[1]][0],beta[R_2==Q[2]][0],beta[R_3==Q[3]][0]])
+
     resultados_df = pd.DataFrame()
     resultados_df["V_kV"] = [35, 30, 25, 20]
-
-    Q = np.zeros(4)
-    for i in zip(R_0,R_1,R_2,R_3):
-        Q += np.asarray(i) * delta_beta
-    
     resultados_df["Q"] = Q
-
     resultados_df.to_excel("DATOS/kramer_datos.ods", engine="odf")
 
-    plt.figure(figsize=(8, 6))
-    plt.plot(beta, R_0, label = r"$V=35kV$")
-    plt.plot(beta, R_1, label = r"$V=30kV$") 
-    plt.plot(beta, R_2, label = r"$V=25kV$") 
-    plt.plot(beta, R_3, label = r"$V=20kV$")  
+    lambda_min = 2 * d * np.sin(beta_min * np.pi / 180)
+ 
+    resultados_df = pd.DataFrame()
+    resultados_df["V_kV"] = [35, 30, 25, 20]
+    resultados_df["lambda_A"] = lambda_min
+    resultados_df.to_excel("DATOS/planck_datos.ods", engine="odf")
+
+    plt.figure(figsize=(10, 8))
+    plt.scatter(beta_min, Q, color="purple", s=25, marker="x", label=r"$\beta_{min}$")
+    plt.plot(beta, R_0, color="lightseagreen", label = r"$V=35kV$")
+    plt.plot(beta, R_1, color="green", label = r"$V=30kV$") 
+    plt.plot(beta, R_2, color="orange", label = r"$V=25kV$") 
+    plt.plot(beta, R_3, color="red", label = r"$V=20kV$")  
     plt.xlabel(r'$\beta$ (º)')
     plt.ylabel(r'$R(\frac{1}{s})$')
     plt.legend()

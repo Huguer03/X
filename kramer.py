@@ -41,7 +41,7 @@ def analisis():
     plt.scatter(lnV, lnQ, label='Datos experimentales', color='red')
     plt.plot(lnV, f(lnV, *popt), label='Ajuste lineal') 
     plt.xlabel(r'$\ln(V)$')
-    plt.ylabel(r'$\ln(A)$')
+    plt.ylabel(r'$\ln(Q)$')
     plt.legend()
     plt.grid(True)
     plt.show()
