@@ -40,7 +40,7 @@ def analisis():
     plt.ylabel(r'$R(\frac{1}{s})$')
     plt.legend()
     plt.grid(True)
-    plt.savefig("FIGURAS/espectro.png")
+    plt.savefig("FIGURAS/espectro.png", dpi=300)
     plt.show()
 
 if __name__ == "__main__":

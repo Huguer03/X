@@ -36,7 +36,7 @@ def analisis():
     ax2.plot(beta, R_suave, color='black', linewidth=1.5, label='Señal Suavizada')
     for i,r in zip(beta_picos, R_picos):
         ax2.axvline(i, color="red", linestyle="--")
-        ax2.text(i + 0.2, r, fr'${i:.1f}º', color='black', fontsize=9, fontweight='bold', verticalalignment='bottom')
+        ax2.text(i + 0.2, r, fr'${i:.1f}$º', color='black', fontsize=9, fontweight='bold', verticalalignment='bottom')
     
     ax2.set_xlabel(r'$\beta$ (º)')
     ax2.set_ylabel("Intensidad")
@@ -44,7 +44,7 @@ def analisis():
     ax2.grid(True)
 
     plt.tight_layout()
-    plt.savefig("FIGURAS/polvo.png")
+    plt.savefig("FIGURAS/polvo.png", dpi=300)
     plt.show()
 
 if __name__ == "__main__":
