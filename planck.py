@@ -44,7 +44,7 @@ def analisis():
     plt.figure(figsize=(8, 6))
     plt.scatter(V_inbersa, lambda_min, label='Datos experimentales', color='red')
     plt.plot(V_inbersa, f(V_inbersa, *popt), label='Ajuste lineal') 
-    plt.xlabel(r'$\frac{1}{V}$ (V)')
+    plt.xlabel(r'$\frac{1}{V}(V^{-1})$')
     plt.ylabel(r'$\lambda$ (m)')
     plt.legend()
     plt.grid(True)
