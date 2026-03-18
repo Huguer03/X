@@ -9,13 +9,13 @@ def analisis():
     d = 2.8201
     data_df = pd.read_excel("DATOS/espectro.xlsx")
 
-    beta = data_df["Beta"].to_numpy() + 0.4
+    beta = data_df["Beta"].to_numpy() 
     R_0  = data_df["R_0"].to_numpy()
     R_1  = data_df["R_1"].to_numpy()
     R_2  = data_df["R_2"].to_numpy()
     R_3  = data_df["R_3"].to_numpy()
 
-    Q        = np.asarray([np.max(R_0[beta<=5.4]), np.max(R_1[beta<=6.2]), np.max(R_2[beta<=6.2]), np.max(R_3[beta<=7])])
+    Q        = np.asarray([np.max(R_0[beta<=5]), np.max(R_1[beta<=5]), np.max(R_2[beta<=5.7]), np.max(R_3[beta<=6.6])])
     beta_min = np.asarray([beta[R_0==Q[0]][0],beta[R_1==Q[1]][0],beta[R_2==Q[2]][0],beta[R_3==Q[3]][0]])
 
     resultados_df = pd.DataFrame()
@@ -40,6 +40,7 @@ def analisis():
     plt.ylabel(r'$R(\frac{1}{s})$')
     plt.legend()
     plt.grid(True)
+    plt.savefig("FIGURAS/espectro.png")
     plt.show()
 
 if __name__ == "__main__":

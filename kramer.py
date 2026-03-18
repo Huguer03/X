@@ -44,6 +44,7 @@ def analisis():
     plt.ylabel(r'$\ln(Q)$')
     plt.legend()
     plt.grid(True)
+    plt.savefig("FIGURAS/kramer.png")
     plt.show()
 
 if __name__ == "__main__":

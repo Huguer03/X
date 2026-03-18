@@ -48,6 +48,7 @@ def analisis():
     plt.ylabel(r'$\lambda$ (m)')
     plt.legend()
     plt.grid(True)
+    plt.savefig("FIGURAS/planck.png")
     plt.show()
 
 if __name__ == "__main__":
